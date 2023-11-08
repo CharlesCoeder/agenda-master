@@ -1,36 +1,23 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Agenda Master
 
-## Getting Started
+Agenda Master is an innovative web-based application designed to assist high school students in navigating the complexities of the college application process. It leverages AI technology to provide a comprehensive, user-friendly platform that not only guides students through college applications but also offers vital financial education and management tools.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **College Application Management:** Streamlines the process of applying to colleges by tracking deadlines and requirements for various institutions.
+- **Financial Advice and Education:** Offers guidance on budgeting, managing salaries, tuition, and credit building, tailored for high school students and their families.
+- **AI-Powered Scheduling:** Utilizes AI to generate personalized timelines for college preparation and application submission.
+- **Interactive Dashboard:** A user-friendly interface that provides students and parents with detailed insights into their progress and upcoming tasks.
+- **Resource Hub:** Includes visual diagrams, articles, and examples to support different learning styles and situations.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Target Users
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+- **High School Students:** Both traditional and non-traditional students planning for college.
+- **Families:** Parents and guardians seeking to assist their children in the college application process.
+- **Educational Professionals:** Counselors and educators can use it as a resource to guide students.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Technologies & Tools
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- **Front-end:** React, Tailwind CSS, Next.js, HTML/CSS, JavaScript
+- **Back-end:** JavaScript
+- **Database:** AWS DynamoDB
