@@ -20,4 +20,32 @@ Agenda Master is an innovative web-based application designed to assist high sch
 
 - **Front-end:** React, Tailwind CSS, Next.js, HTML/CSS, JavaScript
 - **Back-end:** JavaScript
-- **Database:** AWS DynamoDB
+- **Database:** MongoDB
+
+## Project Setup
+
+### Prerequisites
+
+- Node.js
+- `git` command line tool
+
+### 1. Clone the Repository
+
+First, clone the repository to your local machine:
+
+```git clone https://github.com/CharlesCoeder/agenda-master.git```
+
+```cd agenda-master```
+
+### 2. Install Dependencies
+
+Install the necessary Node.js dependencies for the project:
+
+ ```npm install```
+
+ ### 2. Run the Application
+ To start the application in development mode:
+ 
+```npm run dev```
+
+This will start the Next.js server and the application will be accessible at http://localhost:3000.
