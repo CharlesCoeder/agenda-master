@@ -2,6 +2,8 @@
 
 Agenda Master is an innovative web-based application designed to assist high school students in navigating the complexities of the college application process. It leverages AI technology to provide a comprehensive, user-friendly platform that not only guides students through college applications but also offers vital financial education and management tools.
 
+[Live Demo](https://agenda-master-psi.vercel.app/)
+
 ## Features
 
 - **College Application Management:** Streamlines the process of applying to colleges by tracking deadlines and requirements for various institutions.
