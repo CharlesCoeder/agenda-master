@@ -13,6 +13,7 @@ import {
   AccordionHeader,
   AccordionBody,
   Input,
+  Button,
 } from "@material-tailwind/react";
 
 // Importing Heroicons
@@ -51,4 +52,5 @@ export {
   CalendarDaysIcon,
   MagnifyingGlassIcon,
   BanknotesIcon,
+  Button,
 };

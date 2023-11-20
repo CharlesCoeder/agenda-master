@@ -1,9 +1,10 @@
 import Sidebar from "./components/Sidebar";
+import SimpleRegistrationForm from "./registrationForm";
 
 export default function Dashboard() {
   return (
-    <div className="bg-indigo-500">
-      <Sidebar />
+    <div className="flex justify-center items-center h-screen bg-indigo-500">
+      <SimpleRegistrationForm />
     </div>
   );
 }
