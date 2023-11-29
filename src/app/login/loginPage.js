@@ -4,8 +4,22 @@ import {
     Button,
     Typography,
   } from "../components/materialTailwind";
+
+import { ActiveUserContext } from "../components/ActiveUserContext";
+import { useContext } from "react";
    
   export default function LoginPage() {
+
+    const { activeUser, setActiveUser } = useContext(ActiveUserContext);
+
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+
+
+    }
+
+
+
     return (
        <Card className="p-8" color="white" shadow={false}>
         <Typography variant="h4" color="blue-gray">
@@ -26,6 +40,7 @@ import {
               labelProps={{
                 className: "before:content-none after:content-none",
               }}
+              id="email"
             />
             <Typography variant="h6" color="blue-gray" className="-mb-3">
               Password
@@ -38,9 +53,10 @@ import {
               labelProps={{
                 className: "before:content-none after:content-none",
               }}
+              id="password"
             />
           </div>
-          <Button className="mt-6 bg-indigo-500" fullWidth>
+          <Button className="mt-6 bg-indigo-500" fullWidth onSubmit={handleSubmit}>
             Sign In
           </Button>
         </form>
