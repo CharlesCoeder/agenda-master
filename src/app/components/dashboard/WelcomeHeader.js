@@ -15,7 +15,7 @@ function WelcomeHeader({ username }) {
           {getCurrentTimeOfDay()}, {username}!
         </h1>
         <p className="text-indigo-200">
-          Here's your latest application progress.
+        Here&#39;s your latest application progress.
         </p>
       </div>
       <div>
