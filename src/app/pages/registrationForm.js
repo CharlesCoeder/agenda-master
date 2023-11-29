@@ -3,7 +3,7 @@ import {
     Input,
     Button,
     Typography,
-  } from "./components/materialTailwind";
+  } from "../components/materialTailwind";
    
   export default function RegistrationForm() {
     return (
