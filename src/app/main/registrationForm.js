@@ -58,9 +58,7 @@ import Link from "next/link";
           </Button>
           <Typography color="gray" className="mt-4 text-center font-normal">
             Already have an account?{" "}
-            <Link href="/app/loginPage">
-              <a className="font-medium text-gray-900"> Sign In </a>
-            </Link>
+            <Link href="/app/main/loginPage" id="font-medium text-gray-900">Sign In</Link>
           </Typography>
         </form>
       </Card>
