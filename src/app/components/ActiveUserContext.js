@@ -1,6 +1,16 @@
-import { createContext } from "react";
-import { User } from ".../server/backend.js";
+import { createContext, useState } from "react";
+import { User } from "../components/server/backend";
 
-const ActiveUserContext = createContext();
-export {ActiveUserContext};
-export const dummyUser = new User("admin", "admin@admin.com", "admin", "admin", "111-111-1111", "date");
+const dummyUser = new User("admin", "admin@admin.com", "admin", "admin", "111-111-1111", "date");
+export const ActiveUserContext = createContext(dummyUser);
+
+
+export const ActiveUserProvider = ({ children }) => {
+    const [activeUser, setActiveUser] = useState(dummyUser); // Initialize with dummy user
+  
+    return (
+      <ActiveUserContext.Provider value={{ activeUser, setActiveUser }}>
+        {children}
+      </ActiveUserContext.Provider>
+    );
+};

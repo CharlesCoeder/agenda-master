@@ -9,17 +9,17 @@ export class User {
         this.registrationDate = registrationDate;
     }
 
-    get name()                         {return this.name;}
-    set name(newName)                  {this.name = newName;}
-    get email()                        {return this.email;}
-    set email(newEmail)                {this.email = newEmail;}
-    get password()                     {return this.password;}
-    set password(newPassword)          {this.password = newPassword;}
-    get dob()                          {return this.dob;}
-    set dob(newDob)                    {this.dob = newDob;}
-    get phoneNo()                      {return this.phoneNo;}
-    set phoneNo(newPhone)              {this.phoneNo = newPhone;}
-    get registrationDate()             {return this.registrationDate;}
+    get Name()                         {return this.name;}
+    set Name(newName)                  {this.name = newName;}
+    get Email()                        {return this.email;}
+    set Email(newEmail)                {this.email = newEmail;}
+    get Password()                     {return this.password;}
+    set Password(newPassword)          {this.password = newPassword;}
+    get Dob()                          {return this.dob;}
+    set Dob(newDob)                    {this.dob = newDob;}
+    get PhoneNo()                      {return this.phoneNo;}
+    set PhoneNo(newPhone)              {this.phoneNo = newPhone;}
+    get RegistrationDate()             {return this.registrationDate;}
 }
 
 export class College {
