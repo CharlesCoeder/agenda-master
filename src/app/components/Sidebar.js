@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import {
   Card,
   Typography,
@@ -35,7 +36,7 @@ export default function Sidebar() {
   return (
     <Card className="h-screen w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5 rounded-bl-none rounded-tl-none">
       <div className="mb-2 flex items-center gap-4 p-4">
-        <img src="/agenda.svg" alt="agenda" className="h-8 w-8" />
+        <Image src="/agenda.svg" alt="agenda" height={32} width={32} />
         <Typography variant="h5" color="blue-gray">
           Agenda Master
         </Typography>
