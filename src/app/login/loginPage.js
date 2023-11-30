@@ -1,5 +1,3 @@
-"use client";
-
 import {
     Card,
     Input,
@@ -7,12 +5,12 @@ import {
     Typography,
   } from "../components/materialTailwind";
 
-import { ActiveUserProvider, ActiveUserContext } from "../components/ActiveUserContext";
-import { useContext, useState } from "react";
-import Link from "next/link";
-   
-  export default function LoginPage() {
+import { ActiveUserContext } from "../components/ActiveUserContext";
+import { useContext } from "react";
+import { useRouter } from "next/navigation";
 
+export default function LoginPage() {
+    const router = useRouter();
     const { activeUser, setActiveUser } = useContext(ActiveUserContext);
 
     const handleSubmit = async (e) => {
@@ -22,7 +20,7 @@ import Link from "next/link";
       const email = data.get("email");
       const password = data.get("password");
 
-      const response = await fetch("/api/login", {
+      const response = await fetch("/api", {
                                     method: "POST",
                                     headers: { "Content-Type": "application/json" },
                                     body: JSON.stringify({ email, password }),
@@ -33,14 +31,13 @@ import Link from "next/link";
         const user = await response.json();
 
         setActiveUser(user);
-        <Link href="/dashboard" />;
+        router.push("/dashboard");
       }
     }
 
 
 
     return (
-      <ActiveUserProvider>
        <Card className="p-8" color="white" shadow={false}>
         <Typography variant="h4" color="blue-gray">
           Welcome to Agenda Master
@@ -60,7 +57,7 @@ import Link from "next/link";
               labelProps={{
                 className: "before:content-none after:content-none",
               }}
-              id="email"
+              name="email"
             />
             <Typography variant="h6" color="blue-gray" className="-mb-3">
               Password
@@ -73,14 +70,13 @@ import Link from "next/link";
               labelProps={{
                 className: "before:content-none after:content-none",
               }}
-              id="password"
+              name="password"
             />
           </div>
-          <Button className="mt-6 bg-indigo-500" fullWidth>
+          <Button className="mt-6 bg-indigo-500" fullWidth type="submit">
             Sign In
           </Button>
         </form>
       </Card>
-    </ActiveUserProvider>
     );
   }

@@ -14,9 +14,14 @@ export async function connection() {
     };
 
 
-    const client = await MongoClient.connect(uri);
+    const client = await MongoClient.connect(url);
     const db = client.db(dbName);
 
     cachedClient = client;
     cachedDB = db;
+
+    return {
+        client: cachedClient,
+        db: cachedDB
+    }
 }

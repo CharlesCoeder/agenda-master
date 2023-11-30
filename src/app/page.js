@@ -1,4 +1,3 @@
-import Sidebar from "./components/Sidebar";
 import SimpleRegistrationForm from "./login/registrationForm";
 
 export default function Dashboard() {
