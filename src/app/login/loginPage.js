@@ -20,7 +20,7 @@ export default function LoginPage() {
       const email = data.get("email");
       const password = data.get("password");
 
-      const response = await fetch("/api", {
+      const response = await fetch("/api/users", {
                                     method: "POST",
                                     headers: { "Content-Type": "application/json" },
                                     body: JSON.stringify({ email, password }),
