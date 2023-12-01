@@ -5,7 +5,7 @@ import { Input } from "@/app/components/ui/input"; // ShadCN input component
 import { Button } from "@/app/components/ui/button"; // ShadCN button component
 import Link from "next/link";
 
-export default function RegistrationForm() {
+export default function RegisterPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

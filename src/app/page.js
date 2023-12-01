@@ -1,9 +1,40 @@
-import SimpleRegistrationForm from "./login/registrationForm";
+"use client";
+
+import Sidebar from "./components/Sidebar";
+import WelcomeHeader from "./components/dashboard/WelcomeHeader";
+import ApplicationStatusCard from "./components/dashboard/ApplicationStatusCard";
+import DeadlineCard from "./components/dashboard/DeadlineCard";
+import {
+  ActiveUserContext,
+  ActiveUserProvider,
+} from "./components/ActiveUserContext";
+import { useContext } from "react";
+import ActivityCalendarCard from "./components/dashboard/Calendar";
 
 export default function Dashboard() {
+  // const { activeUser } = useContext(ActiveUserContext);
+  // const name = activeUser.Name;
+
+  // console.log(name);
+
   return (
-    <div className="flex justify-center items-center h-screen bg-indigo-500">
-      <SimpleRegistrationForm />
-    </div>
+    <ActiveUserProvider>
+      <div className="flex h-screen bg-indigo-500">
+        <Sidebar />
+        <div className="flex-1 p-4">
+          <WelcomeHeader username="test" />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <ApplicationStatusCard
+              status="Not started"
+              className="md:col-span-1"
+            />
+            <DeadlineCard deadlines={[]} className="md:col-span-1" />
+            <div className="md:col-span-2">
+              <ActivityCalendarCard />
+            </div>
+          </div>
+        </div>
+      </div>
+    </ActiveUserProvider>
   );
 }
