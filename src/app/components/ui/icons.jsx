@@ -1,22 +1,5 @@
 "use client";
 
-// Importing Material Tailwind components
-import {
-  Card,
-  Typography,
-  List,
-  ListItem,
-  ListItemPrefix,
-  ListItemSuffix,
-  Chip,
-  Accordion,
-  AccordionHeader,
-  AccordionBody,
-  Input,
-  Button,
-} from "@material-tailwind/react";
-
-// Importing Heroicons
 import {
   PresentationChartBarIcon,
   UserCircleIcon,
@@ -31,17 +14,6 @@ import {
 } from "@heroicons/react/24/solid";
 
 export {
-  Card,
-  Typography,
-  List,
-  ListItem,
-  ListItemPrefix,
-  ListItemSuffix,
-  Chip,
-  Accordion,
-  AccordionHeader,
-  AccordionBody,
-  Input,
   PresentationChartBarIcon,
   UserCircleIcon,
   Cog6ToothIcon,
@@ -52,5 +24,4 @@ export {
   CalendarDaysIcon,
   MagnifyingGlassIcon,
   BanknotesIcon,
-  Button,
 };

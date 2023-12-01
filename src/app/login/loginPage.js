@@ -1,82 +1,77 @@
-import {
-    Card,
-    Input,
-    Button,
-    Typography,
-  } from "../components/materialTailwind";
+"use client";
 
-import { ActiveUserContext } from "../components/ActiveUserContext";
-import { useContext } from "react";
-import { useRouter } from "next/navigation";
+import React, { useState, useContext } from "react";
+import { Input } from "@/app/components/ui/input"; // Adjusted for ShadCN
+import { Button } from "@/app/components/ui/button"; // Adjusted for ShadCN
+import { ActiveUserContext } from "../components/ActiveUserContext"; // Assuming similar context usage
+import { useRouter } from "next/navigation"; // Assuming similar router usage
 
-export default function LoginPage() {
-    const router = useRouter();
-    const { activeUser, setActiveUser } = useContext(ActiveUserContext);
+function LoginPage() {
+  const router = useRouter();
+  const { setActiveUser } = useContext(ActiveUserContext);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-    const handleSubmit = async (e) => {
-      e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-      const data = new FormData(e.currentTarget);
-      const email = data.get("email");
-      const password = data.get("password");
+    const data = new FormData(e.currentTarget);
+    const email = data.get("email");
+    const password = data.get("password");
 
-      const response = await fetch("/api/users", {
-                                    method: "POST",
-                                    headers: { "Content-Type": "application/json" },
-                                    body: JSON.stringify({ email, password }),
-                                  });
+    const response = await fetch("/api/users", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
 
-      if (response.ok)  {
+    if (response.ok) {
+      const user = await response.json();
 
-        const user = await response.json();
-
-        setActiveUser(user);
-        router.push("/dashboard");
-      }
+      setActiveUser(user);
+      router.push("/dashboard");
     }
+  };
 
+  return (
+    <div className="flex justify-center items-center min-h-screen">
+      <div className="bg-white p-6 rounded-md shadow-md max-w-sm w-full">
+        {/* Title and Description */}
+        <div className="text-center mb-4">
+          <h3 className="text-lg font-semibold">Welcome to Agenda Master</h3>
+          <p className="text-gray-700">Sign in to continue.</p>
+        </div>
 
+        <form onSubmit={handleSubmit} className="grid gap-4">
+          {/* Email Field */}
+          <Input
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="name@mail.com"
+            type="text"
+            className="w-full"
+          />
 
-    return (
-       <Card className="p-8" color="white" shadow={false}>
-        <Typography variant="h4" color="blue-gray">
-          Welcome to Agenda Master
-        </Typography>
-        <Typography color="gray" className="mt-1 font-normal">
-          Sign in to continue.
-        </Typography>
-        <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96" onSubmit={handleSubmit}>
-          <div className="mb-1 flex flex-col gap-6">
-            <Typography variant="h6" color="blue-gray" className="-mb-3">
-              Email
-            </Typography>
-            <Input
-              size="lg"
-              placeholder="name@mail.com"
-              className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
-              labelProps={{
-                className: "before:content-none after:content-none",
-              }}
-              name="email"
-            />
-            <Typography variant="h6" color="blue-gray" className="-mb-3">
-              Password
-            </Typography>
-            <Input
-              type="password"
-              size="lg"
-              placeholder="***********"
-              className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
-              labelProps={{
-                className: "before:content-none after:content-none",
-              }}
-              name="password"
-            />
-          </div>
-          <Button className="mt-6 bg-indigo-500" fullWidth type="submit">
+          {/* Password Field */}
+          <Input
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="***********"
+            type="password"
+            className="w-full"
+          />
+
+          {/* Submit Button */}
+          <Button
+            className="w-full flex justify-center bg-indigo-500"
+            type="submit"
+          >
             Sign In
           </Button>
         </form>
-      </Card>
-    );
-  }
+      </div>
+    </div>
+  );
+}
+
+export default LoginPage;

@@ -1,19 +1,11 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
+import { cn } from "@/lib/utils";
+import { Button } from "@/app/components/ui/button";
+import { ScrollArea } from "@/app/components/ui/scroll-area";
 import {
-  Card,
-  Typography,
-  List,
-  ListItem,
-  ListItemPrefix,
-  ListItemSuffix,
-  Chip,
-  Accordion,
-  AccordionHeader,
-  AccordionBody,
-  Input,
   PresentationChartBarIcon,
   UserCircleIcon,
   Cog6ToothIcon,
@@ -24,124 +16,135 @@ import {
   CalendarDaysIcon,
   MagnifyingGlassIcon,
   BanknotesIcon,
-} from "./materialTailwind";
+} from "./ui/icons";
 
 export default function Sidebar() {
-  const [open, setOpen] = React.useState(0);
+  const [open, setOpen] = useState(false);
 
-  const handleOpen = (value) => {
-    setOpen(open === value ? 0 : value);
+  const handleOpen = () => {
+    setOpen(!open);
   };
-
   return (
-    <Card className="h-screen w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5 rounded-bl-none rounded-tl-none">
+    <div className="h-screen w-full max-w-[20rem] p-4 shadow-xl shadow-gray-900/5 rounded-bl-none rounded-tl-none bg-white">
       <div className="mb-2 flex items-center gap-4 p-4">
         <Image src="/agenda.svg" alt="agenda" height={32} width={32} />
-        <Typography variant="h5" color="blue-gray">
-          Agenda Master
-        </Typography>
+        <h5 className="text-2xl font-semibold color-gray">Agenda Master</h5>
       </div>
-      <div className="p-2">
-        <Input
-          icon={<MagnifyingGlassIcon className="h-5 w-5" />}
-          label="Search"
-        />
-      </div>
-      <List>
-        <ListItem>
-          <ListItemPrefix>
-            <PresentationChartBarIcon className="h-5 w-5" />
-          </ListItemPrefix>
-          Dashboard
-        </ListItem>
-        <ListItem>
-          <ListItemPrefix>
-            <CalendarDaysIcon className="h-5 w-5" />
-          </ListItemPrefix>
-          Timeline
-        </ListItem>
-        <Accordion
-          open={open === 2}
-          icon={
-            <ChevronDownIcon
-              strokeWidth={2.5}
-              className={`mx-auto h-4 w-4 transition-transform ${
-                open === 2 ? "rotate-180" : ""
-              }`}
+      <ScrollArea className="space-y-4">
+        <div className="px-3">
+          <div className="relative">
+            <MagnifyingGlassIcon className="absolute right-3 top-3 h-5 w-5 text-gray-400" />
+            <input
+              type="text"
+              placeholder="Search"
+              className="w-full py-2 pr-10 pl-3 border border-gray-300 rounded"
             />
-          }
-        >
-          <ListItem className="p-0" selected={open === 2}>
-            <AccordionHeader
-              onClick={() => handleOpen(2)}
-              className="border-b-0 p-3"
-            >
-              <ListItemPrefix>
-                <BanknotesIcon className="h-5 w-5" />
-              </ListItemPrefix>
-              <Typography color="blue-gray" className="mr-auto font-normal">
-                Finances
-              </Typography>
-            </AccordionHeader>
-          </ListItem>
-          <AccordionBody className="py-1">
-            <List className="p-0">
-              <ListItem>
-                <ListItemPrefix>
-                  <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                </ListItemPrefix>
-                Financial Aid
-              </ListItem>
-              <ListItem>
-                <ListItemPrefix>
-                  <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                </ListItemPrefix>
-                FASFA
-              </ListItem>
-              <ListItem>
-                <ListItemPrefix>
-                  <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                </ListItemPrefix>
-                TAP
-              </ListItem>
-            </List>
-          </AccordionBody>
-        </Accordion>
-        <hr className="my-2 border-blue-gray-50" />
-        <ListItem>
-          <ListItemPrefix>
-            <InboxIcon className="h-5 w-5" />
-          </ListItemPrefix>
-          Inbox
-          <ListItemSuffix>
-            <Chip
-              value="14"
-              size="sm"
+          </div>
+
+          <div className="space-y-1 mt-4 text-gray-700">
+            <Button
               variant="ghost"
-              color="blue-gray"
-              className="rounded-full"
-            />
-          </ListItemSuffix>
-        </ListItem>
-        <ListItem>
-          <ListItemPrefix>
-            <UserCircleIcon className="h-5 w-5" />
-          </ListItemPrefix>
-          Profile
-        </ListItem>
-        <ListItem>
-          <ListItemPrefix>
-            <Cog6ToothIcon className="h-5 w-5" />
-          </ListItemPrefix>
-          Settings
-        </ListItem>
-        <ListItem>
-          <ListItemPrefix>
-            <PowerIcon className="h-5 w-5" />
-          </ListItemPrefix>
-          Log Out
-        </ListItem>
-      </List>
-    </Card>
+              className="w-full justify-start text-lg font-normal py-6"
+            >
+              <PresentationChartBarIcon className="mr-3 h-5 w-5" />
+              Dashboard
+            </Button>
+            <Button
+              variant="ghost"
+              className="w-full justify-start text-lg font-normal py-6"
+            >
+              <CalendarDaysIcon className="mr-3 h-5 w-5" />
+              Timeline
+            </Button>
+
+            <div>
+              <Button
+                onClick={() => handleOpen(!open)} // Toggle the open state
+                variant="ghost"
+                className="w-full justify-start text-lg font-normal py-6 flex items-center"
+              >
+                <BanknotesIcon className="mr-3 h-5 w-5" />
+                Finances
+                <ChevronDownIcon
+                  className={`ml-auto transform transition-transform h-5 w-5 ${
+                    open ? "rotate-180" : ""
+                  }`}
+                  strokeWidth={2.5}
+                />
+              </Button>
+              <div
+                className={`transition-all duration-300 ease-in-out overflow-hidden ${
+                  open ? "max-h-60 opacity-100" : "max-h-0 opacity-0"
+                }`}
+              >
+                <div className="space-y-1 mt-2 pl-4">
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start text-lg font-normal py-6"
+                  >
+                    <ChevronRightIcon
+                      strokeWidth={3}
+                      className="mr-3 h-3 w-5"
+                    />
+                    Financial Aid
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start text-lg font-normal py-6"
+                  >
+                    <ChevronRightIcon
+                      strokeWidth={3}
+                      className="mr-3 h-3 w-5"
+                    />
+                    FASFA
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start text-lg font-normal py-6"
+                  >
+                    <ChevronRightIcon
+                      strokeWidth={3}
+                      className="mr-3 h-3 w-5"
+                    />
+                    TAP
+                  </Button>
+                </div>
+              </div>
+            </div>
+
+            <hr className="my-2 border-t border-gray-200" />
+
+            <Button
+              variant="ghost"
+              className="w-full justify-start text-lg font-normal py-6"
+            >
+              <InboxIcon className="mr-3 h-5 w-5" />
+              Inbox
+            </Button>
+            <Button
+              variant="ghost"
+              className="w-full justify-start text-lg font-normal py-6"
+            >
+              <UserCircleIcon className="mr-3 h-5 w-5" />
+              Profile
+            </Button>
+            <Button
+              variant="ghost"
+              className="w-full justify-start text-lg font-normal py-6"
+            >
+              <Cog6ToothIcon className="mr-3 h-5 w-5" />
+              Settings
+            </Button>
+            <Button
+              variant="ghost"
+              className="w-full justify-start text-lg font-normal py-6"
+            >
+              <PowerIcon className="mr-3 h-5 w-5" />
+              Log Out
+            </Button>
+          </div>
+        </div>
+      </ScrollArea>
+    </div>
   );
 }
