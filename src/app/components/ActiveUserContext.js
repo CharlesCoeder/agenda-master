@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import { User } from "../components/server/backend";
+import { User } from "../server/backend";
 
 const dummyUser = new User("admin", "admin@admin.com", "admin", "admin", "111-111-1111", "date");
 export const ActiveUserContext = createContext(dummyUser);
