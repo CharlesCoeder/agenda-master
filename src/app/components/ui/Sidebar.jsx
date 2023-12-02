@@ -16,7 +16,7 @@ import {
   MagnifyingGlassIcon,
   BanknotesIcon,
   RectangleStackIcon,
-} from "./ui/icons";
+} from "./icons";
 import Link from "next/link";
 import { signOut } from "next-auth/react";
 

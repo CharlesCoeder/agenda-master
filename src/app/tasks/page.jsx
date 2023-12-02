@@ -8,7 +8,7 @@ import { DataTable } from "./components/data-table";
 import { UserNav } from "./components/user-nav";
 import { taskSchema } from "./data/schema";
 
-import Sidebar from "../components/Sidebar";
+import SidebarLayout from "../components/SidebarLayout";
 
 export const metadata = {
   title: "Tasks",
@@ -44,9 +44,7 @@ export default async function TaskPage() {
   const tasks = await getTasks();
 
   return (
-    <div className="h-screen flex overflow-hidden">
-      <Sidebar />
-
+    <SidebarLayout backgroundColor="">
       <div className="flex-grow flex flex-col overflow-hidden">
         <div className="md:hidden">
           <Image
@@ -84,6 +82,6 @@ export default async function TaskPage() {
           </div>
         </div>
       </div>
-    </div>
+    </SidebarLayout>
   );
 }
