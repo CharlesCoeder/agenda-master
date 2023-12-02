@@ -10,6 +10,36 @@ export default function RegisterPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!name || !password || !email) {
+      console.log("All fields are necessary.");
+      return;
+    }
+
+    try {
+      const res = await fetch("/api/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          email,
+          password,
+        }),
+      });
+
+      if (res.ok) {
+        const form = e.target;
+        form.reset();
+      } else {
+        console.log("User registration failed.");
+      }
+    } catch (error) {
+      console.log("User registration failed. Error: ", error);
+    }
+  };
+
   return (
     <div className="flex justify-center items-center min-h-screen">
       <div className="bg-white p-8 rounded-md shadow-md max-w-sm w-full">
@@ -17,7 +47,7 @@ export default function RegisterPage() {
           Welcome to Agenda Master
         </h4>
         <p className="text-gray-700 font-normal">Sign up to get started.</p>
-        <form className="mt-8 mb-2">
+        <form className="mt-8 mb-2" onSubmit={handleSubmit}>
           <div className="flex flex-col gap-6">
             {/* Name Field */}
             <label className="color-blue-gray font-medium -mb-3">Name</label>
@@ -51,7 +81,7 @@ export default function RegisterPage() {
           </div>
 
           {/* Sign Up Button */}
-          <Button className="mt-6 bg-indigo-500 w-full">Sign Up</Button>
+          <Button type="submit" className="mt-6 bg-indigo-500 w-full">Sign Up</Button>
 
           {/* Sign In Link */}
           <p className="color-gray mt-4 text-center font-normal">
