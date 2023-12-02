@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { cn } from "@/lib/utils";
 import { Button } from "@/app/components/ui/button";
 import { ScrollArea } from "@/app/components/ui/scroll-area";
 import {
@@ -16,8 +15,9 @@ import {
   CalendarDaysIcon,
   MagnifyingGlassIcon,
   BanknotesIcon,
+  RectangleStackIcon,
 } from "./ui/icons";
-
+import Link from "next/link";
 import { signOut } from "next-auth/react";
 
 export default function Sidebar() {
@@ -58,6 +58,16 @@ export default function Sidebar() {
               <CalendarDaysIcon className="mr-3 h-5 w-5" />
               Timeline
             </Button>
+
+            <Link href="/tasks">
+              <Button
+                variant="ghost"
+                className="w-full justify-start text-lg font-normal py-6"
+              >
+                <RectangleStackIcon className="mr-3 h-5 w-5" />
+                Tasks
+              </Button>
+            </Link>
 
             <div>
               <Button
