@@ -22,14 +22,18 @@ async function getTasks() {
 
   const tasks = JSON.parse(data.toString());
 
-  // Transform the dueDate from string to a local Date object (so that timezones aren't necessary)
+  // Manually parse the date string as a UTC date (so that timezones aren't necessary)
   const tasksWithDateObjects = tasks.map((task) => {
-    const [year, month, day] = task.dueDate.split("-").map(Number);
-    const localDate = new Date(year, month - 1, day);
+    const convertToUTCDate = (dueDateStr) => {
+      const [year, month, day] = dueDateStr.split("-").map(Number);
+      return new Date(Date.UTC(year, month - 1, day));
+    };
+
+    const utcDate = convertToUTCDate(task.dueDate);
 
     return {
       ...task,
-      dueDate: localDate,
+      dueDate: utcDate,
     };
   });
 

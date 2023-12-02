@@ -7,6 +7,7 @@ import { labels, priorities, statuses } from "../data/data";
 import { DataTableColumnHeader } from "./data-table-column-header";
 import { DataTableRowActions } from "./data-table-row-actions";
 import format from "date-fns/format";
+import utcToZonedTime from "date-fns-tz/utcToZonedTime";
 
 export const columns = [
   {
@@ -137,8 +138,14 @@ export const columns = [
       <DataTableColumnHeader column={column} title="Due Date" />
     ),
     cell: ({ row }) => {
+      const formatUTCDate = (date) => {
+        const utcDate = utcToZonedTime(date, "UTC");
+        return format(utcDate, "MMM dd, yyyy", { timeZone: "UTC" });
+      };
+
       const dueDate = row.getValue("dueDate");
-      return <span>{format(dueDate, "MMM dd, yyyy")}</span>;
+      const formattedDate = formatUTCDate(dueDate);
+      return <span>{formattedDate}</span>;
     },
   },
   {

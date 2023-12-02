@@ -7,5 +7,41 @@
     "status": "in progress",
     "label": "applications",
     "priority": "high"
+  },
+  {
+    "id": "1",
+    "title": "Complete FASFA",
+    "description": "financial aid task",
+    "dueDate": "2023-12-09",
+    "status": "done",
+    "label": "financials",
+    "priority": "low"
+  },
+  {
+    "id": "1",
+    "title": "This project AHHHH",
+    "description": "it's due way too soon",
+    "dueDate": "2023-12-06",
+    "status": "in progress",
+    "label": "applications",
+    "priority": "medium"
+  },
+  {
+    "id": "1",
+    "title": "This project AHHHH",
+    "description": "it's due way too soon",
+    "dueDate": "2023-12-06",
+    "status": "in progress",
+    "label": "applications",
+    "priority": "high"
+  },
+  {
+    "id": "1",
+    "title": "This project AHHHH",
+    "description": "it's due way too soon",
+    "dueDate": "2023-12-06",
+    "status": "in progress",
+    "label": "applications",
+    "priority": "high"
   }
 ]
