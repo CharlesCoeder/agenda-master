@@ -4,12 +4,15 @@ import React, { useState } from "react";
 import { Input } from "@/app/components/ui/input"; // ShadCN input component
 import { Button } from "@/app/components/ui/button"; // ShadCN button component
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function RegisterPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+
+  const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -45,7 +48,12 @@ export default function RegisterPage() {
 
       if (res.ok) {
         const form = e.target;
+        setName("");
+        setEmail("");
+        setPassword("");
+        setError("");
         form.reset();
+        router.push("/login");
       } else {
         console.log("User registration failed.");
       }
