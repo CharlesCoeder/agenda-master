@@ -108,12 +108,17 @@ export default function RegisterPage() {
           </Button>
 
           {/* Sign In Link */}
-          <p className="color-gray mt-4 text-center font-normal">
-            Already have an account?{" "}
-            <Link href="/login" className="font-medium text-gray-900">
-              Sign In
+          <div className="flex flex-col items-center mt-4">
+            <p className="text-gray-700 font-normal">
+              Already have an account?
+            </p>
+            <Link
+              href="/login"
+              className="font-medium text-gray-900 hover:text-gray-700"
+            >
+              Log in
             </Link>
-          </p>
+          </div>
         </form>
         {error && (
           <div className="bg-red-500 text-white w-fit text-sm py-1 px-3 rounded-md mt-2">

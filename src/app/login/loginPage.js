@@ -5,6 +5,7 @@ import { Input } from "@/app/components/ui/input";
 import { Button } from "@/app/components/ui/button";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
@@ -65,6 +66,16 @@ function LoginPage() {
           >
             Sign In
           </Button>
+          {/* Register Link */}
+          <div className="flex flex-col items-center mt-4">
+            <p className="text-gray-700 font-normal">Don&#39;t have an account?</p>
+            <Link
+              href="/register"
+              className="font-medium text-gray-900 hover:text-gray-700"
+            >
+              Register here
+            </Link>
+          </div>
         </form>
         {error && (
           <div className="bg-red-500 text-white w-fit text-sm py-1 px-3 rounded-md mt-2">
