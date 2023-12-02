@@ -9,12 +9,13 @@ export default function RegisterPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!name || !password || !email) {
-      console.log("All fields are necessary.");
+      setError("All fields are necessary.");
       return;
     }
 
@@ -28,7 +29,7 @@ export default function RegisterPage() {
       const { user } = await resUserExists.json();
 
       if (user) {
-        console.log("User already exists.");
+        setError("Email is already associated with an account.");
         return;
       }
 
@@ -106,6 +107,11 @@ export default function RegisterPage() {
             </Link>
           </p>
         </form>
+        {error && (
+          <div className="bg-red-500 text-white w-fit text-sm py-1 px-3 rounded-md mt-2">
+            {error}
+          </div>
+        )}
       </div>
     </div>
   );

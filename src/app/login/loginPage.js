@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const router = useRouter();
 
@@ -22,7 +23,7 @@ function LoginPage() {
       });
 
       if (res.error) {
-        console.log("Invalid credentials");
+        setError("Invalid credentials");
         return;
       }
       router.replace("/");
@@ -65,6 +66,11 @@ function LoginPage() {
             Sign In
           </Button>
         </form>
+        {error && (
+          <div className="bg-red-500 text-white w-fit text-sm py-1 px-3 rounded-md mt-2">
+            {error}
+          </div>
+        )}
       </div>
     </div>
   );
