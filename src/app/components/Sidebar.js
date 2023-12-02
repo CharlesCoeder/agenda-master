@@ -27,7 +27,7 @@ export default function Sidebar() {
     setOpen(!open);
   };
   return (
-    <div className="h-screen w-full max-w-[20rem] p-4 shadow-xl shadow-gray-900/5 rounded-bl-none rounded-tl-none bg-white">
+    <div className="h-screen w-full flex-shrink-0 max-w-[20rem] p-4 shadow-xl shadow-gray-900/5 rounded-bl-none rounded-tl-none bg-white">
       <div className="mb-2 flex items-center gap-4 p-4">
         <Image src="/agenda.svg" alt="agenda" height={32} width={32} />
         <h5 className="text-2xl font-semibold color-gray">Agenda Master</h5>
