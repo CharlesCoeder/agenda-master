@@ -45,7 +45,15 @@ Install the necessary Node.js dependencies for the project:
 
  ```npm install```
 
- ### 2. Run the Application
+ ### 3. Setup .env file
+ The application will fail unless you have the proper .env at the root of the project:
+ ```
+MONGODB_URI=<theMongoDBConnectionString>
+NEXTAUTH_SECRET=<yourSecretGoesHere>
+NEXTAUTH_URL=http://localhost:3000/
+```
+
+ ### 4. Run the Application
  To start the application in development mode:
  
 ```npm run dev```
