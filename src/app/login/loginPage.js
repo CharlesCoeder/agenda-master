@@ -42,6 +42,7 @@ function LoginPage() {
 
         <form onSubmit={handleSubmit} className="grid gap-4">
           {/* Email Field */}
+          <label className="color-blue-gray font-medium -mb-3">Email</label>
           <Input
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -51,6 +52,7 @@ function LoginPage() {
           />
 
           {/* Password Field */}
+          <label className="color-blue-gray font-medium -mb-3">Password</label>
           <Input
             value={password}
             onChange={(e) => setPassword(e.target.value)}
