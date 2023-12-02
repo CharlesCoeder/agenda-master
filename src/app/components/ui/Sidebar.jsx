@@ -44,20 +44,24 @@ export default function Sidebar() {
           </div>
 
           <div className="space-y-1 mt-4 text-gray-700">
-            <Button
-              variant="ghost"
-              className="w-full justify-start text-lg font-normal py-6"
-            >
-              <PresentationChartBarIcon className="mr-3 h-5 w-5" />
-              Dashboard
-            </Button>
-            <Button
-              variant="ghost"
-              className="w-full justify-start text-lg font-normal py-6"
-            >
-              <CalendarDaysIcon className="mr-3 h-5 w-5" />
-              Timeline
-            </Button>
+            <Link href="/">
+              <Button
+                variant="ghost"
+                className="w-full justify-start text-lg font-normal py-6"
+              >
+                <PresentationChartBarIcon className="mr-3 h-5 w-5" />
+                Dashboard
+              </Button>
+            </Link>
+            <Link href="/timeline">
+              <Button
+                variant="ghost"
+                className="w-full justify-start text-lg font-normal py-6"
+              >
+                <CalendarDaysIcon className="mr-3 h-5 w-5" />
+                Timeline
+              </Button>
+            </Link>
 
             <Link href="/tasks">
               <Button
@@ -90,63 +94,75 @@ export default function Sidebar() {
                 }`}
               >
                 <div className="space-y-1 mt-2 pl-4">
-                  <Button
-                    variant="ghost"
-                    className="w-full justify-start text-lg font-normal py-6"
-                  >
-                    <ChevronRightIcon
-                      strokeWidth={3}
-                      className="mr-3 h-3 w-5"
-                    />
-                    Financial Aid
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    className="w-full justify-start text-lg font-normal py-6"
-                  >
-                    <ChevronRightIcon
-                      strokeWidth={3}
-                      className="mr-3 h-3 w-5"
-                    />
-                    FASFA
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    className="w-full justify-start text-lg font-normal py-6"
-                  >
-                    <ChevronRightIcon
-                      strokeWidth={3}
-                      className="mr-3 h-3 w-5"
-                    />
-                    TAP
-                  </Button>
+                  <Link href="/financial_aid">
+                    <Button
+                      variant="ghost"
+                      className="w-full justify-start text-lg font-normal py-6"
+                    >
+                      <ChevronRightIcon
+                        strokeWidth={3}
+                        className="mr-3 h-3 w-5"
+                      />
+                      Financial Aid
+                    </Button>
+                  </Link>
+                  <Link href="/fasfa">
+                    <Button
+                      variant="ghost"
+                      className="w-full justify-start text-lg font-normal py-6"
+                    >
+                      <ChevronRightIcon
+                        strokeWidth={3}
+                        className="mr-3 h-3 w-5"
+                      />
+                      FASFA
+                    </Button>
+                  </Link>
+                  <Link href="/tap">
+                    <Button
+                      variant="ghost"
+                      className="w-full justify-start text-lg font-normal py-6"
+                    >
+                      <ChevronRightIcon
+                        strokeWidth={3}
+                        className="mr-3 h-3 w-5"
+                      />
+                      TAP
+                    </Button>
+                  </Link>
                 </div>
               </div>
             </div>
 
             <hr className="my-2 border-t border-gray-200" />
 
-            <Button
-              variant="ghost"
-              className="w-full justify-start text-lg font-normal py-6"
-            >
-              <InboxIcon className="mr-3 h-5 w-5" />
-              Inbox
-            </Button>
-            <Button
-              variant="ghost"
-              className="w-full justify-start text-lg font-normal py-6"
-            >
-              <UserCircleIcon className="mr-3 h-5 w-5" />
-              Profile
-            </Button>
-            <Button
-              variant="ghost"
-              className="w-full justify-start text-lg font-normal py-6"
-            >
-              <Cog6ToothIcon className="mr-3 h-5 w-5" />
-              Settings
-            </Button>
+            <Link href="/inbox">
+              <Button
+                variant="ghost"
+                className="w-full justify-start text-lg font-normal py-6"
+              >
+                <InboxIcon className="mr-3 h-5 w-5" />
+                Inbox
+              </Button>
+            </Link>
+            <Link href="/profile">
+              <Button
+                variant="ghost"
+                className="w-full justify-start text-lg font-normal py-6"
+              >
+                <UserCircleIcon className="mr-3 h-5 w-5" />
+                Profile
+              </Button>
+            </Link>
+            <Link href="/settings">
+              <Button
+                variant="ghost"
+                className="w-full justify-start text-lg font-normal py-6"
+              >
+                <Cog6ToothIcon className="mr-3 h-5 w-5" />
+                Settings
+              </Button>
+            </Link>
             <Button
               onClick={() => signOut({ callbackUrl: "/login" })}
               variant="ghost"
