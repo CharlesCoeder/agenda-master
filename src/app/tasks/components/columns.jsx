@@ -6,6 +6,7 @@ import { Checkbox } from "@/app/components/ui/checkbox";
 import { labels, priorities, statuses } from "../data/data";
 import { DataTableColumnHeader } from "./data-table-column-header";
 import { DataTableRowActions } from "./data-table-row-actions";
+import format from "date-fns/format";
 
 export const columns = [
   {
@@ -37,7 +38,7 @@ export const columns = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Task" />
     ),
-    cell: ({ row }) => <div className="w-[80px]">{row.getValue("id")}</div>,
+    cell: ({ row }) => <div className="w-[30px]">{row.getValue("id")}</div>,
     enableSorting: false,
     enableHiding: false,
   },
@@ -52,8 +53,25 @@ export const columns = [
       return (
         <div className="flex space-x-2">
           {label && <Badge variant="outline">{label.label}</Badge>}
-          <span className="max-w-[500px] truncate font-medium">
+          <span className="max-w-[300px] truncate font-medium">
             {row.getValue("title")}
+          </span>
+        </div>
+      );
+    },
+  },
+  {
+    accessorKey: "description",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Description" />
+    ),
+    cell: ({ row }) => {
+      console.log(row);
+
+      return (
+        <div className="flex space-x-2">
+          <span className="max-w-[300px] truncate">
+            {row.getValue("description")}
           </span>
         </div>
       );
@@ -111,6 +129,16 @@ export const columns = [
     },
     filterFn: (row, id, value) => {
       return value.includes(row.getValue(id));
+    },
+  },
+  {
+    accessorKey: "dueDate",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Due Date" />
+    ),
+    cell: ({ row }) => {
+      const dueDate = row.getValue("dueDate");
+      return <span>{format(dueDate, "MMM dd, yyyy")}</span>;
     },
   },
   {

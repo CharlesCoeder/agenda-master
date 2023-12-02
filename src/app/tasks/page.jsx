@@ -22,7 +22,18 @@ async function getTasks() {
 
   const tasks = JSON.parse(data.toString());
 
-  return z.array(taskSchema).parse(tasks);
+  // Transform the dueDate from string to a local Date object (so that timezones aren't necessary)
+  const tasksWithDateObjects = tasks.map((task) => {
+    const [year, month, day] = task.dueDate.split("-").map(Number);
+    const localDate = new Date(year, month - 1, day);
+
+    return {
+      ...task,
+      dueDate: localDate,
+    };
+  });
+
+  return z.array(taskSchema).parse(tasksWithDateObjects);
 }
 
 export default async function TaskPage() {

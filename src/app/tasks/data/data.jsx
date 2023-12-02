@@ -11,16 +11,16 @@ import {
 
 export const labels = [
   {
-    value: "bug",
-    label: "Bug",
+    value: "general",
+    label: "General",
   },
   {
-    value: "feature",
-    label: "Feature",
+    value: "applications",
+    label: "Applications",
   },
   {
-    value: "documentation",
-    label: "Documentation",
+    value: "financials",
+    label: "Financials",
   },
 ];
 
