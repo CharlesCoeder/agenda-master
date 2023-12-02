@@ -1,36 +1,32 @@
 "use client";
 
-import React, { useState, useContext } from "react";
-import { Input } from "@/app/components/ui/input"; // Adjusted for ShadCN
-import { Button } from "@/app/components/ui/button"; // Adjusted for ShadCN
-import { ActiveUserContext } from "../components/ActiveUserContext"; // Assuming similar context usage
-import { useRouter } from "next/navigation"; // Assuming similar router usage
+import React, { useState } from "react";
+import { Input } from "@/app/components/ui/input";
+import { Button } from "@/app/components/ui/button";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 function LoginPage() {
-  const router = useRouter();
-  const { setActiveUser } = useContext(ActiveUserContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const router = useRouter();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      const res = await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+      });
 
-    const data = new FormData(e.currentTarget);
-    const email = data.get("email");
-    const password = data.get("password");
-
-    const response = await fetch("/api/users", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
-
-    if (response.ok) {
-      const user = await response.json();
-
-      setActiveUser(user);
-      router.push("/dashboard");
-    }
+      if (res.error) {
+        console.log("Invalid credentials");
+        return;
+      }
+      router.replace("/");
+    } catch (error) {}
   };
 
   return (

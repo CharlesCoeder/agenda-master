@@ -18,6 +18,8 @@ import {
   BanknotesIcon,
 } from "./ui/icons";
 
+import { signOut } from "next-auth/react";
+
 export default function Sidebar() {
   const [open, setOpen] = useState(false);
 
@@ -136,6 +138,7 @@ export default function Sidebar() {
               Settings
             </Button>
             <Button
+              onClick={() => signOut({ callbackUrl: "/login" })}
               variant="ghost"
               className="w-full justify-start text-lg font-normal py-6"
             >
