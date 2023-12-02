@@ -19,6 +19,19 @@ export default function RegisterPage() {
     }
 
     try {
+      const resUserExists = await fetch("/api/userExists", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      const { user } = await resUserExists.json();
+
+      if (user) {
+        console.log("User already exists.");
+        return;
+      }
+
       const res = await fetch("/api/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -81,7 +94,9 @@ export default function RegisterPage() {
           </div>
 
           {/* Sign Up Button */}
-          <Button type="submit" className="mt-6 bg-indigo-500 w-full">Sign Up</Button>
+          <Button type="submit" className="mt-6 bg-indigo-500 w-full">
+            Sign Up
+          </Button>
 
           {/* Sign In Link */}
           <p className="color-gray mt-4 text-center font-normal">
