@@ -12,7 +12,9 @@ export async function POST(req) {
     await User.create({name, email, password: hashedPassword});
 
     return NextResponse.json({ message: "User registered." }, { status: 201 });
-  } catch {
+  } 
+  
+  catch {
     return NextResponse.json(
       { message: "Error occured while registering the user." },
       { status: 500 }
