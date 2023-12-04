@@ -35,17 +35,32 @@ export default function CreateTaskModal() {
     }
 
     try {
-      const formData = {
-        title,
-        description,
-        dueDate,
-        status,
-        label,
-        priority,
-      };
+      const res = await fetch("/api/tasks/createTask", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title,
+          description,
+          dueDate,
+          status,
+          label,
+          priority,
+        }),
+      });
 
-      // Logging the form data to the console
-      console.log("Form Data:", formData);
+      if (res.ok) {
+        const form = e.target;
+        setTitle("");
+        setDescription("");
+        setDueDate(null);
+        setStatus("");
+        setLabel("");
+        setPriority("");
+        form.reset();
+        console.log("Task created.");
+      } else {
+        console.log("Task creation failed.");
+      }
     } catch (error) {
       console.log("Error in creating task: ", error);
       setError("Error in creating task.");
