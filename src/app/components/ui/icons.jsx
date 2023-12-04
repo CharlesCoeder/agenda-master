@@ -12,6 +12,7 @@ import {
   MagnifyingGlassIcon,
   BanknotesIcon,
   RectangleStackIcon,
+  CalendarIcon,
 } from "@heroicons/react/24/solid";
 
 export {
@@ -26,4 +27,5 @@ export {
   MagnifyingGlassIcon,
   BanknotesIcon,
   RectangleStackIcon,
+  CalendarIcon,
 };
