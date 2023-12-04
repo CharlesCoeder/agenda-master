@@ -14,6 +14,7 @@ import {
   SelectGroup,
 } from "@/app/components/ui/select";
 import { labels, statuses, priorities } from "@/app/tasks/data/data.jsx";
+import { useSession } from "next-auth/react";
 
 export default function CreateTaskModal() {
   const [title, setTitle] = useState("");
@@ -23,6 +24,8 @@ export default function CreateTaskModal() {
   const [label, setLabel] = useState("");
   const [priority, setPriority] = useState("");
   const [error, setError] = useState("");
+
+  const { data } = useSession();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -45,6 +48,7 @@ export default function CreateTaskModal() {
           status,
           label,
           priority,
+          userId: data.user.id,
         }),
       });
 

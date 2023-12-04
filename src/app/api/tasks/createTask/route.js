@@ -4,11 +4,19 @@ import { NextResponse } from "next/server";
 
 export async function POST(req) {
   try {
-    const { title, description, dueDate, status, label, priority } =
+    const { title, description, dueDate, status, label, priority, userId } =
       await req.json();
 
     await connectMongoDB();
-    await Task.create({ title, description, dueDate, status, label, priority });
+    await Task.create({
+      title,
+      description,
+      dueDate,
+      status: status,
+      label: label,
+      priority: priority,
+      userId: userId,
+    });
 
     return NextResponse.json({ message: "Task created." }, { status: 201 });
   } catch {

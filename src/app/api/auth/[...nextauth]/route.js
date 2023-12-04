@@ -26,17 +26,28 @@ export const authOptions = {
           }
 
           return user;
-        } 
-        
-        catch (error) {
+        } catch (error) {
           console.log("Error: ", error);
         }
 
-        
         return user;
       },
     }),
   ],
+  callbacks: {
+    async session({ session, token }) {
+      if (token.uid) {
+        session.user.id = token.uid;
+      }
+      return session;
+    },
+    async jwt({ token, user }) {
+      if (user) {
+        token.uid = user._id.toString();
+      }
+      return token;
+    },
+  },
   session: {
     strategy: "jwt",
   },
