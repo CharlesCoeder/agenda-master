@@ -12,6 +12,10 @@ export default function TaskPage() {
   const [tasks, setTasks] = useState([]);
   const { data: session, status } = useSession();
 
+  const handleNewTask = (newTask) => {
+    setTasks([...tasks, newTask]);
+  };
+
   useEffect(() => {
     async function fetchUserTasks(userId) {
       try {
@@ -66,7 +70,11 @@ export default function TaskPage() {
             </div>
           </div>
           <div className="overflow-x-auto">
-            <DataTable data={tasks} columns={columns} />
+            <DataTable
+              data={tasks}
+              columns={columns}
+              onNewTask={handleNewTask}
+            />
           </div>
         </div>
       </div>

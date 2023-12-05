@@ -16,7 +16,7 @@ import {
 import { labels, statuses, priorities } from "@/app/tasks/data/data.jsx";
 import { useSession } from "next-auth/react";
 
-export default function CreateTaskModal({ onClose }) {
+export default function CreateTaskModal({ onClose, onNewTask }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [dueDate, setDueDate] = useState(null);
@@ -53,17 +53,18 @@ export default function CreateTaskModal({ onClose }) {
       });
 
       if (res.ok) {
-        const form = e.target;
+        const { newTask } = await res.json();
+        onNewTask(newTask);
         setTitle("");
         setDescription("");
         setDueDate(null);
         setStatus("");
         setLabel("");
         setPriority("");
-        form.reset();
+        onClose();
         console.log("Task created.");
       } else {
-        console.log("Task creation failed.");
+        setError("Task creation failed.");
       }
     } catch (error) {
       console.log("Error in creating task: ", error);

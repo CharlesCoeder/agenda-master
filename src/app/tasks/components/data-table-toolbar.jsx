@@ -11,7 +11,7 @@ import { DataTableFacetedFilter } from "./data-table-faceted-filter";
 import { useState } from "react";
 import CreateTaskModal from "@/app/components/tasks/CreateTaskModal";
 
-export function DataTableToolbar({ table }) {
+export function DataTableToolbar({ table, onNewTask }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const isFiltered = table.getState().columnFilters.length > 0;
 
@@ -60,7 +60,7 @@ export function DataTableToolbar({ table }) {
       >
         + Create Task
       </Button>
-      {isModalOpen && <CreateTaskModal onClose={() => setIsModalOpen(false)} />}
+      {isModalOpen && <CreateTaskModal onNewTask={onNewTask} onClose={() => setIsModalOpen(false)} />}
     </div>
   );
 }

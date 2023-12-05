@@ -27,7 +27,7 @@ import {
 import { DataTablePagination } from "./data-table-pagination";
 import { DataTableToolbar } from "./data-table-toolbar";
 
-export function DataTable({ columns, data }) {
+export function DataTable({ columns, data, onNewTask }) {
   const [rowSelection, setRowSelection] = React.useState({});
   const [columnVisibility, setColumnVisibility] = React.useState({});
   const [columnFilters, setColumnFilters] = React.useState([]);
@@ -57,7 +57,7 @@ export function DataTable({ columns, data }) {
 
   return (
     <div className="space-y-4">
-      <DataTableToolbar table={table} />
+      <DataTableToolbar table={table} onNewTask={onNewTask} />
       <div className="rounded-md border">
         <Table>
           <TableHeader>

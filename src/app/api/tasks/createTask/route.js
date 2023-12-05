@@ -8,7 +8,7 @@ export async function POST(req) {
       await req.json();
 
     await connectMongoDB();
-    await Task.create({
+    const newTask = await Task.create({
       title,
       description,
       dueDate,
@@ -18,7 +18,7 @@ export async function POST(req) {
       userId: userId,
     });
 
-    return NextResponse.json({ message: "Task created." }, { status: 201 });
+    return NextResponse.json({ newTask }, { status: 201 });
   } catch {
     return NextResponse.json(
       { message: "Error occured while creating the task." },
