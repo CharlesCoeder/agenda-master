@@ -16,7 +16,7 @@ import {
 import { labels, statuses, priorities } from "@/app/tasks/data/data.jsx";
 import { useSession } from "next-auth/react";
 
-export default function CreateTaskModal() {
+export default function CreateTaskModal({ onClose }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [dueDate, setDueDate] = useState(null);
@@ -72,8 +72,18 @@ export default function CreateTaskModal() {
   };
 
   return (
-    <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
+    <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
       <div className="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+        {/* Close Button */}
+        <button
+          onClick={onClose}
+          className="absolute top-3 right-6 text-gray-600 hover:text-gray-800"
+          aria-label="Close"
+        >
+          <span className="text-3xl" aria-hidden="true">
+            &times;
+          </span>
+        </button>
         <h2 className="text-lg font-semibold mb-4">Create a New Task</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Title Field */}

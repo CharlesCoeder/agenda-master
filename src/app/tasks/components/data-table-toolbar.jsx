@@ -1,25 +1,26 @@
-"use client"
+"use client";
 
-import { Cross2Icon } from "@radix-ui/react-icons"
+import { Cross2Icon } from "@radix-ui/react-icons";
 
-import { Button } from "@/app/components/ui/button"
-import { Input } from "@/app/components/ui/input"
-import { DataTableViewOptions } from "./data-table-view-options"
+import { Button } from "@/app/components/ui/button";
+import { Input } from "@/app/components/ui/input";
+import { DataTableViewOptions } from "./data-table-view-options";
 
-import { priorities, statuses } from "../data/data"
-import { DataTableFacetedFilter } from "./data-table-faceted-filter"
+import { priorities, statuses } from "../data/data";
+import { DataTableFacetedFilter } from "./data-table-faceted-filter";
+import { useState } from "react";
+import CreateTaskModal from "@/app/components/tasks/CreateTaskModal";
 
-export function DataTableToolbar({
-  table,
-}) {
-  const isFiltered = table.getState().columnFilters.length > 0
+export function DataTableToolbar({ table }) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const isFiltered = table.getState().columnFilters.length > 0;
 
   return (
     <div className="flex items-center justify-between">
       <div className="flex flex-1 items-center space-x-2">
         <Input
           placeholder="Filter tasks..."
-          value={(table.getColumn("title")?.getFilterValue()) ?? ""}
+          value={table.getColumn("title")?.getFilterValue() ?? ""}
           onChange={(event) =>
             table.getColumn("title")?.setFilterValue(event.target.value)
           }
@@ -51,6 +52,15 @@ export function DataTableToolbar({
         )}
       </div>
       <DataTableViewOptions table={table} />
+      <Button
+        variant="outline"
+        size="sm"
+        className="ml-auto hidden h-8 lg:flex"
+        onClick={() => setIsModalOpen(true)}
+      >
+        + Create Task
+      </Button>
+      {isModalOpen && <CreateTaskModal onClose={() => setIsModalOpen(false)} />}
     </div>
-  )
+  );
 }
