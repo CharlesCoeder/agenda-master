@@ -16,6 +16,7 @@ import {
   MagnifyingGlassIcon,
   BanknotesIcon,
   RectangleStackIcon,
+  FireIcon,
 } from "./icons";
 import Link from "next/link";
 import { signOut } from "next-auth/react";
@@ -51,6 +52,15 @@ export default function Sidebar() {
               >
                 <PresentationChartBarIcon className="mr-3 h-5 w-5" />
                 Dashboard
+              </Button>
+            </Link>
+            <Link href="/ai_assistant">
+              <Button
+                variant="ghost"
+                className="w-full justify-start text-lg font-normal py-6"
+              >
+                <FireIcon className="mr-3 h-5 w-5" />
+                AI Assistant
               </Button>
             </Link>
             <Link href="/timeline">

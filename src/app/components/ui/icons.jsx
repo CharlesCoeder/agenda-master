@@ -13,6 +13,7 @@ import {
   BanknotesIcon,
   RectangleStackIcon,
   CalendarIcon,
+  FireIcon,
 } from "@heroicons/react/24/solid";
 
 export {
@@ -28,4 +29,5 @@ export {
   BanknotesIcon,
   RectangleStackIcon,
   CalendarIcon,
+  FireIcon,
 };
