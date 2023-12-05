@@ -7,6 +7,7 @@ import { DataTable } from "./components/data-table";
 import { UserNav } from "./components/user-nav";
 import SidebarLayout from "../components/SidebarLayout";
 import { useSession } from "next-auth/react";
+import fetchTasks from "@/utils/fetchTasks";
 
 export default function TaskPage() {
   const [tasks, setTasks] = useState([]);
@@ -17,21 +18,12 @@ export default function TaskPage() {
   };
 
   useEffect(() => {
-    async function fetchUserTasks(userId) {
-      try {
-        const response = await fetch(`/api/tasks/${userId}`);
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const fetchedTasks = await response.json();
-        setTasks(fetchedTasks);
-      } catch (error) {
-        console.error("Error fetching tasks:", error);
-      }
-    }
-
     if (status === "authenticated") {
-      fetchUserTasks(session.user.id);
+      fetchTasks(session.user.id)
+        .then((fetchedTasks) => setTasks(fetchedTasks))
+        .catch((error) => {
+          console.log("Error fetching tasks: ", error);
+        });
     }
   }, [status, session]);
 
