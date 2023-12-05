@@ -1,47 +1,35 @@
-import { promises as fs } from "fs";
-import path from "path";
-import Image from "next/image";
-import { z } from "zod";
+"use client";
 
+import React, { useEffect, useState } from "react";
+import Image from "next/image";
 import { columns } from "./components/columns";
 import { DataTable } from "./components/data-table";
 import { UserNav } from "./components/user-nav";
-import { taskSchema } from "./data/schema";
-
 import SidebarLayout from "../components/SidebarLayout";
+import { useSession } from "next-auth/react";
 
-export const metadata = {
-  title: "Tasks",
-  description: "A task and issue tracker build using Tanstack Table.",
-};
+export default function TaskPage() {
+  const [tasks, setTasks] = useState([]);
+  const { data: session, status } = useSession();
 
-async function getTasks() {
-  const data = await fs.readFile(
-    path.join(process.cwd(), "src/app/tasks/data/tasks.json")
-  );
+  useEffect(() => {
+    async function fetchUserTasks(userId) {
+      try {
+        const response = await fetch(`/api/tasks/${userId}`);
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const fetchedTasks = await response.json();
+        setTasks(fetchedTasks);
+      } catch (error) {
+        console.error("Error fetching tasks:", error);
+      }
+    }
 
-  const tasks = JSON.parse(data.toString());
-
-  // Manually parse the date string as a UTC date (so that timezones aren't necessary)
-  const tasksWithDateObjects = tasks.map((task) => {
-    const convertToUTCDate = (dueDateStr) => {
-      const [year, month, day] = dueDateStr.split("-").map(Number);
-      return new Date(Date.UTC(year, month - 1, day));
-    };
-
-    const utcDate = convertToUTCDate(task.dueDate);
-
-    return {
-      ...task,
-      dueDate: utcDate,
-    };
-  });
-
-  return z.array(taskSchema).parse(tasksWithDateObjects);
-}
-
-export default async function TaskPage() {
-  const tasks = await getTasks();
+    if (status === "authenticated") {
+      fetchUserTasks(session.user.id);
+    }
+  }, [status, session]);
 
   return (
     <SidebarLayout backgroundColor="">
