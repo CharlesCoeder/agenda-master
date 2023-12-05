@@ -67,8 +67,6 @@ export const columns = [
       <DataTableColumnHeader column={column} title="Description" />
     ),
     cell: ({ row }) => {
-      console.log(row);
-
       return (
         <div className="flex space-x-2">
           <span className="max-w-[300px] truncate">
