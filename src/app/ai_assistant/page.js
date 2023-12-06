@@ -13,6 +13,7 @@ export default function Page() {
   const [selectedDeadlines, setSelectedDeadlines] = useState([]);
   const [taskAllocations, setTaskAllocations] = useState({});
   const [currentStep, setCurrentStep] = useState("collegeSelection");
+  const [apiResponse, setApiResponse] = useState(null);
 
   useEffect(() => {
     const getColleges = async () => {
@@ -34,8 +35,30 @@ export default function Page() {
     setCurrentStep("taskAllocation");
   };
 
-  const handleTaskAllocationsSubmit = (allocations) => {
+  const handleTaskAllocationsSubmit = async (allocations) => {
     setTaskAllocations(allocations);
+
+    try {
+      const response = await fetch("/api/openai/generateTasks", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          college: selectedCollege,
+          selectedDeadlines: selectedDeadlines,
+          taskAllocations: allocations,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      setApiResponse(data);
+    } catch (error) {
+      console.error("Error fetching tasks:", error);
+    }
+
     setCurrentStep("summary");
   };
 
@@ -51,6 +74,8 @@ export default function Page() {
             </p>
           </div>
         ))}
+        <h3 className="text-lg font-semibold mt-4">API Response:</h3>
+        <pre>{JSON.stringify(apiResponse, null, 2)}</pre>{" "}
       </div>
     );
   };
