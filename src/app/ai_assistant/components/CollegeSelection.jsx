@@ -32,7 +32,12 @@ const CollegeSelection = ({ colleges, onCollegeSelect }) => {
           </CardHeader>
           <CardContent>{college.description}</CardContent>
           <CardFooter>
-            <Button onClick={() => handleCollegeSelect(college)}>Select</Button>
+            <Button
+              className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              onClick={() => handleCollegeSelect(college)}
+            >
+              Select
+            </Button>
           </CardFooter>
         </Card>
       ))}
