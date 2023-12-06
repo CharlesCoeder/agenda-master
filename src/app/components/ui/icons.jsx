@@ -14,6 +14,8 @@ import {
   RectangleStackIcon,
   CalendarIcon,
   FireIcon,
+  CheckIcon,
+  ChevronUpDownIcon,
 } from "@heroicons/react/24/solid";
 
 export {
@@ -30,4 +32,6 @@ export {
   RectangleStackIcon,
   CalendarIcon,
   FireIcon,
+  CheckIcon,
+  ChevronUpDownIcon,
 };
