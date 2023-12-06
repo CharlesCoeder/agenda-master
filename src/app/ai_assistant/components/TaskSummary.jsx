@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import {
   Card,
@@ -8,8 +10,33 @@ import {
   CardFooter,
 } from "@/app/components/ui/card";
 import { Button } from "@/app/components/ui/button";
+import { useSession } from "next-auth/react";
 
-const TaskSummary = ({ tasks, onRetry, onConfirm }) => {
+const TaskSummary = ({ tasks, handleRetry, handleSuccess }) => {
+  const { data } = useSession();
+
+  const handleConfirm = async () => {
+    try {
+      const res = await fetch("/api/tasks/uploadBatchedTasks", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(
+          tasks.map((task) => ({
+            ...task,
+            userId: data.user.id,
+          }))
+        ),
+      });
+
+      if (!res.ok) {
+        throw new Error(`HTTP error! Status: ${res.status}`);
+      }
+      handleSuccess();
+    } catch (error) {
+      console.error("Error submitting tasks:", error);
+    }
+  };
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 className="text-2xl font-bold text-center mb-6 text-white">
@@ -41,13 +68,13 @@ const TaskSummary = ({ tasks, onRetry, onConfirm }) => {
       <div className="flex justify-center space-x-4">
         <Button
           className="mt-4 bg-gray-400 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded"
-          onClick={onRetry}
+          onClick={handleRetry}
         >
           Retry
         </Button>
         <Button
           className="mt-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-          onClick={onConfirm}
+          onClick={handleConfirm}
         >
           Confirm
         </Button>

@@ -61,6 +61,13 @@ export default function Page() {
     setCurrentStep("taskSummary");
   };
 
+  const handleSuccess = () => {
+    setSelectedCollege(null);
+    setSelectedDeadlines([]);
+    setTaskAllocations({});
+    setCurrentStep("collegeSelection");
+  };
+
   return (
     <SidebarLayout>
       <div className="w-full h-full flex flex-col justify-center items-center">
@@ -90,7 +97,11 @@ export default function Page() {
         )}
 
         {!isLoading && currentStep === "taskSummary" && apiResponse && (
-          <TaskSummary tasks={apiResponse} onRetry={handleRetry} />
+          <TaskSummary
+            tasks={apiResponse}
+            handleRetry={handleRetry}
+            handleSuccess={handleSuccess}
+          />
         )}
       </div>
     </SidebarLayout>
