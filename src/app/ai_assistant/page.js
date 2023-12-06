@@ -12,6 +12,7 @@ export default function Page() {
   const [selectedCollege, setSelectedCollege] = useState(null);
   const [selectedDeadlines, setSelectedDeadlines] = useState([]);
   const [taskAllocations, setTaskAllocations] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
   const [currentStep, setCurrentStep] = useState("collegeSelection");
   const [apiResponse, setApiResponse] = useState(null);
 
@@ -36,6 +37,20 @@ export default function Page() {
   };
 
   const handleTaskAllocationsSubmit = async (allocations) => {
+    // rate limiting purposes
+    if (isLoading) {
+      console.log("Please wait, AI Assistant is busy generating tasks.");
+      return;
+    }
+
+    setIsLoading(true);
+
+    // set 10 second delay before user can try fetch the API again
+    // (this is a safeguard and shouldn't matter in practice)
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 10000);
+
     setTaskAllocations(allocations);
 
     try {
