@@ -9,12 +9,13 @@ export async function POST(req) {
     const client = new openai.OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
     const response = await client.chat.completions.create({
-      model: "gpt-3.5-turbo",
+      model: "gpt-3.5-turbo-1106",
       response_format: { type: "json_object" },
       messages: [
         {
           role: "system",
-          content: "You are a helpful assistant designed to output JSON.",
+          content:
+            "You are an AI assistant designed to help students create a timeline of tasks for college applications. Please output the tasks in JSON format.",
         },
         { role: "user", content: prompt },
       ],
