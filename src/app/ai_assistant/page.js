@@ -8,6 +8,7 @@ import TaskAllocation from "./components/TaskAllocation";
 import fetchColleges from "@/utils/fetchColleges";
 import LoadingSpinner from "./components/LoadingSpinner";
 import TaskSummary from "./components/TaskSummary";
+import generateTasks from "@/utils/generateTasks";
 
 export default function Page() {
   const [colleges, setColleges] = useState([]);
@@ -39,40 +40,25 @@ export default function Page() {
   };
 
   const handleTaskAllocationsSubmit = async (allocations) => {
-    if (isLoading) {
-      console.log("Please wait, AI Assistant is busy generating tasks.");
-      return;
-    }
+    await generateTasks(
+      selectedCollege,
+      selectedDeadlines,
+      allocations,
+      setIsLoading,
+      setApiResponse
+    );
+    setCurrentStep("taskSummary");
+  };
 
-    setIsLoading(true);
-    setTaskAllocations(allocations);
-
-    try {
-      const response = await fetch("/api/openai/generateTasks", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          college: selectedCollege,
-          selectedDeadlines: selectedDeadlines,
-          taskAllocations: allocations,
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      let data = await response.json();
-      data = JSON.parse(data); // parse twice b/c respones is over-stringified
-      const { tasks } = data;
-
-      setApiResponse(tasks);
-      setCurrentStep("taskSummary");
-    } catch (error) {
-      console.error("Error fetching tasks:", error);
-    } finally {
-      setIsLoading(false);
-    }
+  const handleRetry = async () => {
+    await generateTasks(
+      selectedCollege,
+      selectedDeadlines,
+      taskAllocations,
+      setIsLoading,
+      setApiResponse
+    );
+    setCurrentStep("taskSummary");
   };
 
   return (
@@ -104,7 +90,7 @@ export default function Page() {
         )}
 
         {!isLoading && currentStep === "taskSummary" && apiResponse && (
-          <TaskSummary tasks={apiResponse} />
+          <TaskSummary tasks={apiResponse} onRetry={handleRetry} />
         )}
       </div>
     </SidebarLayout>
